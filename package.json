@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-training",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "nodemon": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "restapis",
+    "backend"
+  ],
+  "author": "Muhammad Junaid Aziz",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20"
+  }
+}
