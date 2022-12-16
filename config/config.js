@@ -1,11 +1,11 @@
 module.exports = {
     "development": {
-        "username": "mysql",
-        "password": "mysql",
-        "database": "librarymanagment",
+        "username": "root",
+        "password": "root",
+        "database": "tododb",
         "host": "localhost",
         "logging": true,
-        "port": 5432,
+        "port": 3306,
         "dialect": "mysql",
         "baseUrl": "http://localhost:8080"
     }

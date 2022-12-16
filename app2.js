@@ -17,15 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Setup Cors
 const corsOption = {
     origin: '*',
-    methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
-    exposedHeaders: [
-        "Authorization",
-        "Content-Type",
-        "x-auth-token",
-        "authorization"
-    ],
-    credentials: true
 };
+
 app.use(cors(corsOption));
 
 app.use(require("./routes/index"));
