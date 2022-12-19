@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-require('dotenv').config();
-const privateKey = 123456;
+// require('dotenv').config();
+const privateKey = '123456';
 
 const verifyToken = (req, res, next) => {
     const bearerHeader = req.headers['authorization'];
@@ -11,14 +11,13 @@ const verifyToken = (req, res, next) => {
         const bearerToken = bearer[1];
         req.token = bearerToken;
 
-        let token = req.token;
-        // console.log('token ', token);
+        const { token } = req;
+        console.log('token ', token);
 
         jwt.verify(token, privateKey, (err, user) => {
             if (err) {
                 console.log("err", err)
                 // return res.sendStatus(403);
-
                 return res.status(403).send({ status: false, message: err.message });
             }
 
@@ -33,5 +32,6 @@ const verifyToken = (req, res, next) => {
 }
 
 module.exports = {
-    verifyToken
+    verifyToken,
+    privateKey
 }

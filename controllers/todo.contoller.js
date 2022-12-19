@@ -1,5 +1,8 @@
 const todoService = require('../services/todo.service');
 
+
+const login = (req, res) => todoService.login(req, res);
+
 const getTodos = (req, res) => todoService.getTodos(req, res);
 
 const addTodo = (req, res) => todoService.addTodo(req, res);
@@ -16,4 +19,5 @@ module.exports = {
   getTodoById,
   updateTodo,
   deleteTodo,
+  login
 };

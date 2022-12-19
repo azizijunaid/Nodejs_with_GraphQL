@@ -1,4 +1,27 @@
 const todoModel = require('../models').Todo;
+const { privateKey } = require('../middleware/auth');
+const jwt = require('jsonwebtoken');
+
+const login = async (req, res) => {
+    try {
+        const user = {
+            firstName: "junaid",
+            lastName: "Aziz"
+        }
+    
+        jwt.sign({ user }, privateKey, { expiresIn: '300s' }, (err, token)=> {
+            if(err){
+                res.status(500).send({status: false, message: err.message});
+            }
+            user.token = token;
+    
+            // return new user
+            res.status(201).json(user);
+        });
+    } catch (error) {
+        res.status(500).json({status: false, message: error.message});
+    }
+}
 
 const getTodos = async (req, res) => {
   try {
@@ -104,4 +127,5 @@ module.exports = {
   getTodoById,
   updateTodo,
   deleteTodo,
+  login
 };
