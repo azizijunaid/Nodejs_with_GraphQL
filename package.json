@@ -5,8 +5,12 @@
   "main": "app2.js",
   "scripts": {
     "nodemon": "nodemon app2.js --trace-warnings",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node -- ./src/server.js"
   },
+  "presets": [
+    "@babel/preset-env"
+  ],
   "keywords": [
     "nodejs",
     "restapis",
@@ -15,16 +19,25 @@
   "author": "Muhammad Junaid Aziz",
   "license": "ISC",
   "dependencies": {
+    "@sentry/node": "^7.29.0",
+    "apollo-server-express": "^3.11.1",
     "body-parser": "^1.20.1",
     "chalk": "^4.1.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "graphql": "^16.6.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.8.0",
-    "nodemon": "^2.0.20",
     "sequelize": "^6.11.0",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.7",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "nodemon": "^2.0.20"
   }
 }
