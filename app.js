@@ -1,50 +1,46 @@
-const http = require('http');
+// Example middleware-based application
 
-const REQUIRED_CONTENT_TYPE = 'application/json';
-const ACCEPT_ENCODING_1 = 'application/json';
-const ACCEPT_ENCODING_2 = '*/*';
+const express = require("express");
+const app = express();
 
-const entryCheck = function (req) {
-  const contentType = req.headers['content-type'];
-  if (!contentType.includes(REQUIRED_CONTENT_TYPE)) {
-    throw new Error('Sorry we only support content type as json format.');
+
+// Authentication middleware
+function authenticate(req, res, next) {
+  if (req.headers.authorization === "secret-token") {
+    next();
+  } else {
+    console.log("error 401");
+    res.sendStatus(401);
   }
+}
 
-  const accept = req.headers['accept'];
-  if (
-    !(accept.includes(ACCEPT_ENCODING_1) || accept.includes(ACCEPT_ENCODING_2))
-  ) {
-    throw new Error('Sorry we only support accept json format.');
-  }
-};
 
-const requestListener = function (req, res) {
-  try {
-    entryCheck(req);
-    const methodType = req.method.toUpperCase();
-    switch (methodType) {
-      case 'GET':
-        res.writeHead(200);
-        res.end(`We received ${methodType} type request`);
-        break;
-      case 'POST':
-        res.writeHead(200);
-        res.end(`We received ${methodType} type request`);
-        break;
-      case 'PUT':
-        res.writeHead(200);
-        res.end(`We received ${methodType} type request`);
-        break;
-      case 'DELETE':
-        res.writeHead(200);
-        res.end(`We received ${methodType} type request`);
-        break;
-    }
-  } catch (error) {
-    res.writeHead(400);
-    res.end(error.message);
-  }
-};
 
-const server = http.createServer(requestListener);
-server.listen(3000);
+
+
+
+// Middleware usage
+app.use(authenticate);
+
+
+// Routes
+
+app.get("/", (req, res) => {
+  res.send("<h1>Middle ware 1!</h1>");
+});
+
+app.get("/about", (req, res) => {
+  res.send("<h1>About Us</h1>");
+  //throw new Error('error')
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.send(`<h1>${err.message}</h1>`)
+  res.sendStatus(500);
+});
+
+app.listen(3000, () => {
+  console.log("Server listening on port 3000");
+});
